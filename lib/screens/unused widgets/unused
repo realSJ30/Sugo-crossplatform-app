@@ -1,0 +1,777 @@
+Widget dateTimePicker() {
+  //   return Padding(
+  //     padding: EdgeInsets.only(
+  //         right: MediaQuery.of(context).size.width / 18,
+  //         left: MediaQuery.of(context).size.width / 18),
+  //     child: ButtonTheme(
+  //       minWidth: MediaQuery.of(context).size.width - 30,
+  //       child: OutlineButton(
+  //         splashColor: secondaryColor,
+  //         shape:
+  //             RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+  //         onPressed: () {
+  //           _pickDate();
+  //         },
+  //         child: Stack(
+  //           children: <Widget>[
+  //             Padding(
+  //               padding: const EdgeInsets.only(left: 20.0),
+  //               child: Align(
+  //                 alignment: Alignment.centerRight,
+  //                 child: Tab(
+  //                     icon: Icon(
+  //                   Icons.date_range,
+  //                   color: primaryColor,
+  //                 )),
+  //               ),
+  //             ),
+  //             Align(
+  //               alignment: Alignment.center,
+  //               child: Padding(
+  //                 padding: const EdgeInsets.all(15.0),
+  //                 child: buildLabelText(
+  //                     displayDate(), 14.0, primaryColor, FontWeight.normal),
+  //               ),
+  //             )
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
+
+  // _pickDate() async {
+  //   DateTime date = await showDatePicker(
+  //       context: context,
+  //       initialDate: pickedDate,
+  //       firstDate: DateTime(DateTime.now().year - 80),
+  //       lastDate: DateTime(DateTime.now().year + 5));
+  //   if (date != null) {
+  //     setState(() {
+  //       pickedDate = date;
+  //       setValues(); //pg pick sa date matic update sa json..
+  //     });
+  //   }
+  // }
+
+  // String displayDate() {
+  //   String date = '';
+  //   final df = new DateFormat('MMMM dd, yyyy');
+  //   date = df.format(pickedDate);
+  //   return date;
+  // }
+
+  // String dateformat() {
+  //   String date = '';
+  //   final df = new DateFormat('yyyyMMdd');
+  //   date = df.format(pickedDate);
+  //   return date;
+  // }
+  Widget bottomAppBar(Function changePage) {
+  //   return CurvedNavigationBar(
+  //     items: <Widget>[
+  //       Icon(
+  //         Icons.home,
+  //         size: 25.0,
+  //         color: Colors.white,
+  //       ),
+  //       Icon(
+  //         Icons.work,
+  //         size: 25.0,
+  //         color: Colors.white,
+  //       ),
+  //       Icon(
+  //         Icons.chat,
+  //         size: 25.0,
+  //         color: Colors.white,
+  //       ),
+  //       Icon(
+  //         Icons.person,
+  //         size: 25.0,
+  //         color: Colors.white,
+  //       ),
+  //     ],
+  //     onTap: (index) {
+  //       setState(() {
+  //         if (index == 0) {
+  //           changePage(Services(), 'Services', 0);
+  //         } else if (index == 1) {
+  //           changePage(Errands(), 'Errands', 1);
+  //         } else if (index == 2) {
+  //           changePage(Inbox(), 'Inbox', 2);
+  //         } else {
+  //           changePage(Profile(), 'Profile', 3);
+  //         }
+  //       });
+  //     },
+  //     index: _currentIndex, //default selected index...
+
+  //     animationDuration: Duration(milliseconds: 200),
+  //     animationCurve: Curves.bounceInOut,
+  //     height: 50.0,
+  //     color: primaryColor, //background color sa bottom nav
+  //     backgroundColor: Colors
+  //         .white, //color sa ktng murag oval nga galihok2 kng knsa ang focused
+  //     buttonBackgroundColor: primaryColor, //background color sa button mismo
+  //   );
+  // }
+
+
+
+
+
+
+
+  // var paymentsMethods = await http.post(
+                  // 'https://checkout-test.adyen.com/v65/paymentMethods',
+                  //     headers: apiContent,
+                  //     body: jsonEncode({'merchantAccount': 'SugoAccountECOM'}));
+                  http.Response payments = await http.post(
+                      'https://checkout-test.adyen.com/v64/payments',
+                      headers: apiContent,
+                      body: jsonEncode({
+                        'amount': {'currency': 'PHP', 'value': 1020},
+                        'reference': 'order1012',
+                        'paymentMethod': {'type': 'gcash'},
+                        'returnUrl': 'adyencheckout://com.example.sugo_app',
+                        'merchantAccount': 'SugoAccountECOM',
+                      }));
+                  // print('RESULT: ${result.statusCode}');
+                  //print('PAYMENT: ${payments.request.url.toFilePath().toString()}');
+                  print('STATUS CODE: ${payments.statusCode}');
+                  print('BODY: ${payments.body}');
+                  print('HEADERS: ${payments.headers}');
+                  print('REQUEST: ${payments.request}');
+                  // Map<String, dynamic> jsonMap = jsonDecode(payments.body);
+
+                  // print('PAYMENT: ${jsonMap['action']}');
+                  // var paymentDetails = await http.post(
+                  // 'https://checkout-test.adyen.com/v65/payments/details/',
+                  //   headers: apiContent,
+                  //   body: jsonEncode({
+                  //     'paymentData': '${jsonMap['paymentData']}',
+                  //     'details': {
+                  //       'MD': 'eyJ0aHJlZURTQ29tcEluZCI6ICJZIn0=',
+                  //       'PaRes': 'enasdjasjsss22sa'
+                  //     }
+                  //   }),
+                  // );
+
+                  // print('PAYMENT STATUS: ${payments.request.url}');
+                  // print('DETAILS: ${paymentDetails.body}');
+                  // print('DETAILS: ${paymentDetails.statusCode}');
+
+                  // print('JSON: ${jsonMap['paymentData']}');
+                  // try {
+                  //   // String token = await Candidate().getToken();
+                  //   String dropin = await FlutterAdyen.openDropIn(
+                  //     paymentMethods: paymentsMethods.body,
+                  //     baseUrl: 'https://checkout-test.adyen.com/v64/payments/',
+                  //     authToken: 'Bearer 8016030014903259',
+                  //     merchantAccount: 'SugoAccountECOM',
+                  //     // publicKey: '10001|AF6FC2BB9D420095AF95E073CF609FC5EE5285D4FEA44FC5C84F60E7D41E438083A81E4422503C13748E26C4E2EDED5E4BB46D268ABCD99A8A67BB3A073525D11CF303DB73F8E9AAC8BE49380D06D5D8884B1AA044F36EC0A253A12ADBEB6F01D4DE29E17545AAAA48332DB6D2F624DAF26DC6882C9F0D42D0F606A1AFF4BE82D6CB486FE3A5BB83370BB834C113D3160A495CBB9881FE649CA0CC29D9B4233FD425E82752E88B37767CB9A44DBF1995B9C075371830BDD7EC89F76EA0498EE5E6B57396DE9CEFDBF76144DCF742891877A6BA005E8FDB229809ED36A4EA30606AAB0B0E528D723AEDB82C6DC306EE4929A31F4AFEA9F94ED6A45E6F4FF5E6CF',
+                  //     // publicKey: 'AQEmhmfuXNWTK0Qc+iSDh2M3hueYR55DGT5Kd71sYLpckhfVVS3z30IQwV1bDb7kfNy1WIxIIkxgBw==-luEAwY5d+c/YGEz26T9gNMqaFa/gJCs/W5SKZU1CxEA=-+Jeb2gArTw(m5Hb4',
+                  //     amount: '150',
+                  //     currency: 'PHP',
+                  //     shopperReference:
+                  //         DateTime.now().millisecondsSinceEpoch.toString(),
+                  //     reference:
+                  //         DateTime.now().millisecondsSinceEpoch.toString(),
+                  //   );
+                  //   print('DROPIN $dropin');
+                  // } catch (e) {
+                  //   print('error101: \n${e.toString()}');
+                  //   // print('RESPONSE ${dropinResponse.toString()}');
+                  // }
+                  // var paymentsMethods = await http.post(
+                  // 'https://checkout-test.adyen.com/v65/paymentMethods',
+                  //     headers: apiContent,
+                  //     body: jsonEncode({'merchantAccount': 'SugoAccountECOM'}));
+                  http.Response payments = await http.post(
+                      'https://checkout-test.adyen.com/v64/payments',
+                      headers: apiContent,
+                      body: jsonEncode({
+                        'amount': {'currency': 'PHP', 'value': '25000'},
+                        'reference': 'order1012',
+                        'paymentMethod': {'type': 'gcash'},
+                        'returnUrl': 'adyencheckout://com.example.sugo_app',
+                        'merchantAccount': 'SugoAccountECOM',
+                      }));
+                  // print('RESULT: ${result.statusCode}');
+                  //print('PAYMENT: ${payments.request.url.toFilePath().toString()}');
+                  // print('STATUS CODE: ${payments.statusCode}');
+                  // log('BODY: ${payments.body} end');
+                  // print('HEADERS: ${payments.headers}');
+                  // print('REQUEST: ${payments.request}');
+                  Map<dynamic, dynamic> paymentJSON = jsonDecode(payments.body);
+                  
+                  
+                  // http.Response redirect =
+                  //     await http.get(paymentJSON['redirect']['url'].toString());
+                  
+                  // var url = paymentJSON['redirect']['url'].toString();
+                  // redirect.statusCode == 200
+                  //     ? await launch(url)
+                  //     : print('CANNOT EXECUTE');
+                  // await launch(url);
+
+                  // log(payments.body);
+                  // log(paymentJSON['paymentData']);
+
+                  //   try {
+                  //     String dropin = await FlutterAdyen.openDropIn(
+                  //       paymentMethods: paymentsMethods.body,
+                  //       baseUrl: 'https://checkout-test.adyen.com/v64/payments/',
+                  //       authToken: 'Bearer 8016030014903259',
+                  //       publicKey: '10001|AF6FC2BB9D420095AF95E073CF609FC5EE5285D4FEA44FC5C84F60E7D41E438083A81E4422503C13748E26C4E2EDED5E4BB46D268ABCD99A8A67BB3A073525D11CF303DB73F8E9AAC8BE49380D06D5D8884B1AA044F36EC0A253A12ADBEB6F01D4DE29E17545AAAA48332DB6D2F624DAF26DC6882C9F0D42D0F606A1AFF4BE82D6CB486FE3A5BB83370BB834C113D3160A495CBB9881FE649CA0CC29D9B4233FD425E82752E88B37767CB9A44DBF1995B9C075371830BDD7EC89F76EA0498EE5E6B57396DE9CEFDBF76144DCF742891877A6BA005E8FDB229809ED36A4EA30606AAB0B0E528D723AEDB82C6DC306EE4929A31F4AFEA9F94ED6A45E6F4FF5E6CF',
+                  //       merchantAccount: 'SugoAccountECOM',
+                  //       amount: '150',
+                  //       currency: 'PHP',
+                  //       shopperReference:
+                  //           DateTime.now().millisecondsSinceEpoch.toString(),
+                  //       reference:
+                  //           DateTime.now().millisecondsSinceEpoch.toString(),
+                  //     );
+                  //     print('DROPIN $dropin');
+                  //   } catch (e) {
+                  //     print('error101: \n${e.toString()}');
+                  //     // print('RESPONSE ${dropinResponse.toString()}');
+                  //   }
+
+
+
+
+
+
+
+                  ///UPDATED
+                  import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:flutter/services.dart';
+import 'package:flutter_web_auth/flutter_web_auth.dart';
+import 'package:intent/intent.dart' as android_intent;
+import 'package:intent/action.dart' as android_action;
+import 'package:flutter/material.dart';
+import 'package:loading_overlay/loading_overlay.dart';
+import 'package:provider/provider.dart';
+import 'package:sugoapp/models/freelancer.dart';
+import 'package:sugoapp/models/posts.dart';
+import 'package:sugoapp/screens/home/communication/convo.dart';
+import 'package:http/http.dart' as http;
+import 'package:sugoapp/screens/home/services/current/payment/paymentconfig.dart';
+import 'package:sugoapp/screens/home/services/current/posted/freelancers/requestsList.dart';
+import 'package:firebase_auth/firebase_auth.dart' as fb_auth;
+import 'package:sugoapp/services/auth.dart';
+import 'package:sugoapp/services/chatdatabase.dart';
+import 'package:sugoapp/services/servicesdatabase.dart';
+import 'package:sugoapp/shared/constants.dart';
+import 'package:sugoapp/shared/widgets.dart';
+
+class PostedDetailModal extends StatefulWidget {
+  final Post post;
+  PostedDetailModal({this.post});
+  @override
+  _PostedDetailModalState createState() => _PostedDetailModalState();
+}
+
+class _PostedDetailModalState extends State<PostedDetailModal> {
+  AuthService _auth = new AuthService();
+  int modalIndex;
+  bool _isLoading = false;
+  void changeIndex(int index) {
+    setState(() {
+      modalIndex = index;
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    modalIndex = 0; //starting index
+    print('RESTART MODAL');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return LoadingOverlay(
+        isLoading: _isLoading,
+        child: Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Container(
+                color: Colors.blue[600],
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Center(
+                          child: InkWell(
+                            onTap: () {
+                              changeIndex(0);
+                            },
+                            child: buildSubLabelText(
+                                'Details',
+                                modalIndex == 0 ? 20.0 : 16.0,
+                                modalIndex == 0 ? Colors.white : Colors.white54,
+                                FontWeight.normal),
+                          ),
+                        ),
+                      ),
+                      widget.post.status == 'posted'
+                          ? Expanded(
+                              child: Center(
+                                child: InkWell(
+                                  onTap: () {
+                                    changeIndex(1);
+                                    print('requestssss');
+                                  },
+                                  child: buildSubLabelText(
+                                      'Requests',
+                                      modalIndex == 1 ? 20.0 : 16.0,
+                                      modalIndex == 1
+                                          ? Colors.white
+                                          : Colors.white54,
+                                      FontWeight.normal),
+                                ),
+                              ),
+                            )
+                          : Expanded(
+                              child: Center(
+                                child: InkWell(
+                                  onTap: () async {
+                                    changeIndex(1);
+                                    print('moreeee');
+                                  },
+                                  child: buildSubLabelText(
+                                      'More',
+                                      modalIndex == 1 ? 20.0 : 16.0,
+                                      modalIndex == 1
+                                          ? Colors.white
+                                          : Colors.white54,
+                                      FontWeight.normal),
+                                ),
+                              ),
+                            ),
+                    ],
+                  ),
+                ),
+              ),
+              widget.post.status == 'posted'
+                  ? modalIndex == 0
+                      ? detailsContainer()
+                      : requestContainer()
+                  : modalIndex == 0
+                      ? detailsContainer()
+                      : moreOptionsContainer(context),
+            ],
+          ),
+        ));
+  }
+
+  Widget detailsContainer() {
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: buildSubLabelText(
+                'DETAILS', 18.0, Colors.black54, FontWeight.bold),
+          ),
+          Expanded(
+            child: Container(
+                child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: ListView(
+                // crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.blue[50],
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [                        
+                          buildLabelText(widget.post.errandType, 18.0,
+                              Colors.black, FontWeight.bold),
+                          separator(5),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              buildSubLabelText('Service Fee', 12.0, Colors.blue,
+                                  FontWeight.normal),
+                              Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: buildLabelText(widget.post.fee + ' PHP', 14.0,
+                                    Colors.black, FontWeight.normal),
+                              ),
+                            ],
+                          ),
+                          separator(5),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              buildSubLabelText('Payment method', 12.0,
+                                  Colors.blue, FontWeight.normal),
+                              Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: buildLabelText(widget.post.paymentType, 14.0,
+                                    Colors.black, FontWeight.normal),
+                              ),
+                            ],
+                          ),
+                          separator(5),
+                          Row(
+                            children: [
+                              buildSubLabelText('ADDRESS', 12.0, Colors.blue,
+                                  FontWeight.normal),
+                              Icon(
+                                Icons.location_on,
+                                size: 20,
+                                color: Colors.blue,
+                              )
+                            ],
+                          ),
+                          buildSubLabelText(
+                              '1', 12.0, Colors.grey, FontWeight.normal),
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: buildLabelText(widget.post.address1, 14.0,
+                                Colors.black, FontWeight.normal),
+                          ),
+                          buildSubLabelText(
+                              '2', 12.0, Colors.grey, FontWeight.normal),
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: buildLabelText(
+                                widget.post.address2.isEmpty ? '(N/A)' : widget.post.address2,
+                                14.0,
+                                widget.post.address2.isEmpty
+                                    ? Colors.black54
+                                    : Colors.black,
+                                FontWeight.normal),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  separator(10),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              buildSubLabelText('Information/Notes', 12.0,
+                                  Colors.black, FontWeight.normal),
+                              Icon(
+                                Icons.notes,
+                                size: 20,
+                                color: Colors.black,
+                              ),
+                              Expanded(child: Divider(thickness: 0.5,color: Colors.grey,))
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: buildLabelText(widget.post.notes, 14.0, Colors.black,
+                                FontWeight.normal),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget requestContainer() {
+    return StreamProvider<List<Freelancer>>.value(
+        value: ServicesDatabase(postid: widget.post.postID).freelancers,
+        child: Container(
+          height: getMediaQueryHeightViaDivision(context, 2),
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: RequestsList(
+              post: widget.post,
+            ),
+          ),
+        ));
+  }
+
+  Widget moreOptionsContainer(BuildContext context) {
+    return FutureBuilder(
+      future: ServicesDatabase(postid: widget.post.postID)
+          .getAcceptedFreelancerProfile(),
+      builder: (context, snap) {
+        if (!snap.hasData) {
+          return moreOptionsPanel('N/A');
+        }
+        return moreOptionsPanel(snap.data);
+      },
+    );
+  }
+
+  Widget moreOptionsPanel(String name) {
+    return Container(
+        height: getMediaQueryHeightViaDivision(context, 2),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              buildSubLabelText(
+                  'Freelancer', 12.0, Colors.grey, FontWeight.normal),
+              ListTile(
+                leading: Icon(Icons.person,size: 30),
+                title: buildLabelText(
+                    name, 16.0, Colors.black, FontWeight.normal),
+              ),
+              Divider(
+                thickness: 1.5,
+              ),
+              buildSubLabelText(
+                  'Actions', 12.0, Colors.grey, FontWeight.normal),
+              Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 8.0),
+                              child: ButtonTheme(
+                                child: RaisedButton(
+                                    onPressed: () async {
+                                      fb_auth.User user =
+                                          await _auth.getCurrentUser();
+                                      print('CHATT');
+                                      await ChatDatabase(
+                                              errandID: widget.post.postID)
+                                          .createChatRoom(
+                                            clientUID: user.uid,
+                                            freelancerUID: await ServicesDatabase(
+                                                    postid: widget.post.postID)
+                                                .getFreelancerUIDfromRequests(),
+                                            createdAt: dateTime(),
+                                          )
+                                          .whenComplete(() => Navigator.push(
+                                              context,
+                                              new MaterialPageRoute(
+                                                  builder: (context) => Convo(
+                                                        post: widget.post,
+                                                        myUID: user.uid,
+                                                      ))));
+                                    },
+                                    color: Colors.blue[400],
+                                    splashColor: secondaryColor,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0)),
+                                    child: Row(children: [
+                                      Icon(Icons.message_rounded),
+                                      buildLabelText('Message', 16.0,
+                                        Colors.white, FontWeight.normal)
+                                    ],)),
+                                        
+                              ),
+                            ),
+                          ),
+                          
+                        ],
+                      ),
+                      Divider(
+                        thickness: 1.5,
+                      ),
+                      separator(10),
+                      ButtonTheme(
+                        height: 50,
+                        child: RaisedButton(
+                            onPressed: () async {
+                              //if GCASH ang method before maka rate is mg bayad sa ka
+                              if (widget.post.paymentType == 'GCASH') {
+                                _showInAppPaymentConfirmation();
+                              } else {
+                                _showInAppPaymentConfirmation();
+                              }
+                            },
+                            color: Colors.green[400],
+                            splashColor: secondaryColor,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0)),
+                            child: buildLabelText('Rate Job', 16.0,
+                                Colors.white, FontWeight.normal)),
+                      ),
+                    ],
+                  )),
+            ],
+          ),
+        ));
+  }
+
+  void _showInAppPaymentConfirmation() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            title: buildLabelText('GCASH Payment Confirmation', 16.0,
+                primaryColor, FontWeight.normal),
+            content: buildLabelText("Please confirm your transaction first!",
+                14.0, Colors.grey, FontWeight.normal),
+            actions: <Widget>[
+              FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: buildLabelText(
+                      'Cancel', 14.0, Colors.black, FontWeight.normal)),
+              FlatButton(
+                  // ignore: missing_return
+                  onPressed: () async {
+                    //remove data to cloud
+                    Navigator.pop(context);
+                    setLoading(true);
+                    fb_auth.User user = await _auth.getCurrentUser();
+                    String reference = user.uid;
+                    double value = double.parse(widget.post.fee) * 100;
+
+                    http.Response payments = await http.post(
+                        'https://checkout-test.adyen.com/v64/payments',
+                        headers: apiContent,
+                        body: jsonEncode({
+                          'amount': {'currency': 'PHP', 'value': value},
+                          'reference': reference,
+                          'paymentMethod': {'type': 'gcash'},
+                          'returnUrl': 'adyencheckout://com.example.sugo_app',
+                          'merchantAccount': 'SugoAccountECOM',
+                        }));
+                    Map<dynamic, dynamic> paymentJSON =
+                        jsonDecode(payments.body);
+
+                    launchUrl(paymentJSON['redirect']['url'].toString(),
+                        paymentJSON['paymentData']);
+                  },
+                  child: buildLabelText(
+                      'Confirm', 14.0, primaryColor, FontWeight.normal)),
+            ],
+          );
+        });
+  }
+
+  void launchUrl(String url, String paymentData) async {
+    print('LAUNCHING PAYMENT URL');
+    if (Platform.isAndroid) {
+      try {
+        final result = await FlutterWebAuth.authenticate(
+            url: url, callbackUrlScheme: 'adyencheckout');
+
+        final payload = Uri.parse(result).queryParameters['payload'];
+        print('PAYLOAD = $payload');
+
+        showPaymentTransactionDialog(
+            payload: payload, paymentData: paymentData);
+      } catch (e) {
+        setLoading(false);
+        print(e);
+      }
+    }
+  }
+
+  void setLoading(bool load) {
+    setState(() {
+      this._isLoading = load;
+    });
+  }
+
+  void showPaymentTransactionDialog(
+      {String paymentData, String payload}) async {
+    var paymentDetails = await http
+        .post(
+          'https://checkout-test.adyen.com/v65/payments/details/',
+          headers: apiContent,
+          body: jsonEncode({
+            'paymentData': paymentData,
+            'details': {
+              'payload': payload,
+            }
+          }),
+        )
+        .whenComplete(() => setLoading(false));
+    Map<dynamic, dynamic> detailsJSON = jsonDecode(paymentDetails.body);
+    print('RESULT CODE:${detailsJSON['resultCode']}');
+    print('Reference:${detailsJSON['pspReference']}');
+    if (detailsJSON['resultCode'] == 'Authorised') {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)),
+              title: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  buildLabelText(
+                      'Payment Success', 16.0, primaryColor, FontWeight.normal),
+                  buildLabelText(
+                      'Payment Details', 12.0, Colors.grey, FontWeight.normal),
+                  separator(10),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: buildSubLabelText('Reference:', 12.0,
+                            Colors.black, FontWeight.normal),
+                      ),
+                      buildLabelText(detailsJSON['pspReference'], 14.0,
+                          Colors.grey, FontWeight.normal),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: buildSubLabelText(
+                            'Amount:', 12.0, Colors.black, FontWeight.normal),
+                      ),
+                      buildLabelText('PHP ${widget.post.fee}', 14.0,
+                          Colors.grey, FontWeight.normal),
+                    ],
+                  )
+                ],
+              ),
+              actions: <Widget>[
+                FlatButton(
+                    // ignore: missing_return
+                    onPressed: () async {
+                      //remove data to cloud
+                      Navigator.pop(context);
+                    },
+                    child: buildLabelText(
+                        'Proceed', 14.0, primaryColor, FontWeight.normal)),
+              ],
+            );
+          });
+    }
+  }
+}

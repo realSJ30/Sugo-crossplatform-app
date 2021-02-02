@@ -1,0 +1,93 @@
+{
+  "project_info": {
+    "project_number": "738255021719",
+    "firebase_url": "https://sugo-app-e6c10.firebaseio.com",
+    "project_id": "sugo-app-e6c10",
+    "storage_bucket": "sugo-app-e6c10.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:738255021719:android:a987dd7d298b7482246bd2",
+        "android_client_info": {
+          "package_name": "com.capstone.sugoapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "738255021719-f4vik3747t85o7podsqtba5hk56l32qr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.capstone.sugoapp",
+            "certificate_hash": "f5e87955874bbba9710a4275f74a6eb95f335fbc"
+          }
+        },
+        {
+          "client_id": "738255021719-h3lnq15f634b9kscjmi5gtq3gb1en5ft.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWa1P46rxAQ-PHkG2DuRxg0jzYPriVtSM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "738255021719-h3lnq15f634b9kscjmi5gtq3gb1en5ft.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:738255021719:android:21f62936bebae6ee246bd2",
+        "android_client_info": {
+          "package_name": "com.example.sugo_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "738255021719-s4mcgal94rcvc8qhodsma6v693i6oeim.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sugo_app",
+            "certificate_hash": "f5e87955874bbba9710a4275f74a6eb95f335fbc"
+          }
+        },
+        {
+          "client_id": "738255021719-ev1ekmem3m6cdn37aj90vl7ojpbps4dl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sugo_app",
+            "certificate_hash": "9dcef46389e06ec0580d78c0c470ad6bde2b2c71"
+          }
+        },
+        {
+          "client_id": "738255021719-h3lnq15f634b9kscjmi5gtq3gb1en5ft.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWa1P46rxAQ-PHkG2DuRxg0jzYPriVtSM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "738255021719-h3lnq15f634b9kscjmi5gtq3gb1en5ft.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
